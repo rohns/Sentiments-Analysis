@@ -1,13 +1,10 @@
 ---
-  title: "Sentiment Analysis "
-output:
-  pdf_document: default
-html_notebook: default
-word_document: default
+title: "Sentiment Analysis Notebook "
+output: html_notebook
 ---
   
-  
-```{r, echo=FALSE, message=FALSE}
+
+```{r}
 library(dplyr) # for data wrangling & manipulation
 library(tidytext) # for unnest_tokens
 library(stringr) # to manage text
@@ -30,7 +27,7 @@ df<- df_art%>%
 
 ## Article Titles
 The analysis shows that among the most popular words used in article titles are: COVID-19, SARS, 2020, and United States. The top 10 commonly used words and the number of times they appeared on the article titles are shown below. 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 #art_title
 title <- data_frame(text = df$art_title) %>%
   unnest_tokens(word, text) %>%    # split words
@@ -50,7 +47,8 @@ title %>% filter(n > 30)%>%
 
 ## What is Known
 The variable represent further information about the titles. Analysis of the variable shows that similar words are used like in the headlines. COVID, SARS, health, and transmission are some of th most commonly used terms. A list of top 10 words is shown below accompanied with a visualization of the commonly used words with more than 30 entries.
-```{r,  echo=FALSE, message=FALSE}
+
+```{r}
 #what_is_known
 known <- data_frame(text = df$what_is_known) %>% 
   unnest_tokens(word, text) %>%    # split words
@@ -71,8 +69,8 @@ known%>% filter(n > 30)%>%
 
 ## What is Added
 Additional information included in the articles was analyzed to determine how it impacted the audience. Sentiment analysis shows that most of the terms used affected the readers negatively. Below is a list of words and how they could have affected the audience. The analysis shows more negative sentiments than positive.
-```{r,  echo=FALSE, message=FALSE}
 
+```{r}
 #what_is_added
 added <- data_frame(text = df$what_is_added) %>% 
   unnest_tokens(word, text) %>%    # split words
@@ -125,13 +123,11 @@ implication_bing %>%
   ylab("Contribution to sentiment") +
   ggtitle("Word Usage in Implications", subtitle = "Sentiment Analysis Using
 Bing et al.")
-
 ```
 
 ## Publication Dates
 We analyzed the publications dates by determining the number of publication done in each month. April 2021 had the most publications followed by October 2020. The publication date data is visualized below for clear understanding of the differences in number of articles published between 2020 and 2021.
-
-```{r,  echo=FALSE, message=FALSE}
+```{r}
 library(lubridate)
 
 dates <- df %>%
@@ -151,3 +147,5 @@ dates %>%
   ylab("Number of publications") +
   ggtitle("Dates of Publication and Number of Publications")
 ```
+
+
